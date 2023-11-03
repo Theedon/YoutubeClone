@@ -1,5 +1,5 @@
 import { SubscriptionTypes } from "@/types";
-import PlaylistTypes from "@/types/PlaylistProps";
+import { PlaylistTypes } from "@/types";
 
 export const subscriptions: SubscriptionTypes[] = [
   {
