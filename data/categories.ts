@@ -1,0 +1,21 @@
+const categories: string[] = [
+  "All",
+  "Javascript",
+  "Typescript",
+  "Boxing",
+  "Fighting",
+  "Punching",
+  "Scripting",
+  "Editing",
+  "Swimming",
+  "Laughing",
+  "Dancing",
+  "Shouting",
+  "Running",
+  "PoleVaults",
+  "Celebrity",
+  "Tyson",
+  "James",
+  "Wembayama",
+];
+export default categories;
