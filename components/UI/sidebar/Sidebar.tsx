@@ -2,8 +2,6 @@
 import SmallSidebarItems from "./SmallSidebar";
 import { LargeSidebarItem, LargeSidebarSection } from "./LargeSidebar";
 import {
-  ChevronDown,
-  ChevronUp,
   Clapperboard,
   Clock,
   Home,
@@ -26,11 +24,18 @@ import {
 } from "lucide-react";
 import { subscriptions } from "@/data/sidebarItems";
 import { playlists } from "@/data/sidebarItems";
+import { useSidebarContext } from "@/app/contexts/SidebarContext";
+import PageHeaderFirstSection from "../PageHeaderFirstSection";
 
 function Sidebar() {
+  const { isSmallOpen, isLargeOpen, close } = useSidebarContext();
   return (
     <>
-      <aside className="scrollbar-hidden top-0 flex flex-col overflow-y-auto lg:hidden">
+      <aside
+        className={`scrollbar-hidden top-0 flex-col overflow-y-auto overflow-x-hidden lg:hidden ${
+          isLargeOpen ? "lg:hidden" : "lg:flex"
+        }`}
+      >
         <SmallSidebarItems title="Home" Icon={Home} url="/" />
         <SmallSidebarItems title="Shorts" Icon={Repeat} url="/shorts" />
         <SmallSidebarItems
@@ -40,7 +45,24 @@ function Sidebar() {
         />
         <SmallSidebarItems title="Library" Icon={Library} url="/library" />
       </aside>
-      <aside className="scrollbar-hidden absolute top-0 hidden w-56 overflow-y-auto lg:sticky lg:flex lg:flex-col">
+      {isSmallOpen && (
+        <div
+          onClick={close}
+          className="fixed inset-0 z-[999] h-full w-full bg-secondary-dark opacity-50 lg:hidden"
+        ></div>
+      )}
+      <aside
+        className={`scrollbar-hidden absolute top-0  w-56 flex-col overflow-y-auto overflow-x-hidden lg:sticky ${
+          isLargeOpen ? "lg:flex" : "lg:hidden"
+        } ${
+          isSmallOpen
+            ? " ro z-[999] flex max-h-screen rounded-r-md bg-white"
+            : "hidden"
+        }`}
+      >
+        <div className={`sticky top-0 bg-white px-2 pb-4 pt-2 lg:hidden `}>
+          <PageHeaderFirstSection />
+        </div>
         <LargeSidebarSection>
           <LargeSidebarItem isActive IconOrImgUrl={Home} title="Home" url="/" />
           <LargeSidebarItem
