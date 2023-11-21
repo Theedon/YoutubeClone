@@ -1,19 +1,16 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Menu,
-  Video,
-  BellDot,
-  User,
-  Search,
-  Mic,
-  ArrowLeft,
-} from "lucide-react";
+import { Video, BellDot, User, Search, Mic, ArrowLeft } from "lucide-react";
 import { Button } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSidebarContext } from "@/app/contexts/SidebarContext";
+import PageHeaderFirstSection from "./PageHeaderFirstSection";
+
 function PageHeader() {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);
+  const { toggle, isSmallOpen } = useSidebarContext();
+
   return (
     <div
       onClick={() => {
@@ -21,26 +18,7 @@ function PageHeader() {
       }}
       className="mx-4 mb-6 flex w-full justify-between gap-10 pt-2 lg:gap-20"
     >
-      <div
-        className={`flex flex-shrink-0 items-center gap-4 ${
-          showFullWidthSearch ? "hidden" : "flex"
-        } `}
-      >
-        <Button variant="ghost" size="icon">
-          <Menu />
-        </Button>
-
-        <Link className="flex" href="/">
-          <Image
-            className="mr-1"
-            src="/youtubeLogo.png"
-            alt="youtube-logo"
-            height={20}
-            width={20}
-          ></Image>{" "}
-          Youtube
-        </Link>
-      </div>
+      <PageHeaderFirstSection showFullWidthSearch={showFullWidthSearch} />
 
       <form
         className={`flex-grow justify-end gap-4 md:flex md:justify-center ${
